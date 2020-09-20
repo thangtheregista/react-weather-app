@@ -1,13 +1,16 @@
 import React from 'react';
-import './App.css';
+
 
 //COMPONENTS
 import Header from "./components/Header"
 
+//STYLE
+import './App.css';
+
 
 function App() {
   return (
-    <div className="App">
+    <div className="container">
       <Header />
     </div>
   );
