@@ -1,12 +1,14 @@
 import React from 'react';
 import LocationInput from "./LocationInput"
 
-const Header = () => {
+const Header = (props) => {
+    const { getLocationID } = props;
     return(
         <header>
             <p
             className="header">Weather App</p>
-            <LocationInput />
+            <LocationInput
+            getLocationID={getLocationID} />
         </header>
     )
 }

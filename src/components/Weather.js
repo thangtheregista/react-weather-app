@@ -1,26 +1,18 @@
 import React from 'react';
 
-const Weather = () => {
+const Weather = (props) => {
     return(
-        <section>
-            <h1
-            className="location">London</h1>
-            <div
-            className="weather-container">
-                <div
-                className="weather-box">
-                    <p>Today</p>
-                    <p>Min: 4.35 &deg;C</p>
-                    <p>Max: 13.05 &deg;C</p>
-                </div>
-                <div
-                className="weather-box">
-                    <p>Tomorrow</p>
-                    <p>Min: 4.35 &deg;C</p>
-                    <p>Max: 13.05 &deg;C</p>
-                </div>
+    <section>
+      <div>
+        <h1>{props.title}</h1>
+        <div>
+            <div>
+                <p>{props.maxTemp}</p>
+                <p>{props.minTemp}</p>
             </div>
-        </section>
+        </div>
+      </div>
+    </section>
     )
 }
 

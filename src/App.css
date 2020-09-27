@@ -27,24 +27,9 @@ body {
   padding: 5px 10px;
   outline: none;
 }
-.location {
-  padding: 20px 0;
-  margin: 0;
-  font-size: 20px;
-  font-weight: 450;
+.section{
+  width: 100%;
 }
-.weather-container {
-  padding: 5px;
-  box-sizing: border-box;
-  border: 1px dashed black;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.weather-box {
-  border: 1px dashed black;
-}
-p {
-  margin: 0;
-  padding: 5px;
+div{
+  width: 100%;
 }
