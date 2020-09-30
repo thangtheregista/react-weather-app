@@ -27,9 +27,24 @@ body {
   padding: 5px 10px;
   outline: none;
 }
-.section{
-  width: 100%;
+.suggestions-box {
+  box-sizing: border-box;
+  border: 1px dashed black;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 1;
+  position: absolute;
+  background: burlywood;
+  width: 300px;
 }
-div{
-  width: 100%;
+.suggestion {
+  border: 1px dashed black
+}
+section {
+  padding: 20px 0;
+  margin: 0;
+}
+.weather-report {
+  border: 1px dashed black;
 }

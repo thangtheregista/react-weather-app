@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-
 const LocationInput = (props) => {
-    const { getLocationID } = props;
+    const { getLocationID, searchLocation, suggestions } = props;
     const [city, setCity] = useState("");
     const onAddCity = (e = {}) => {
         if (e.key === "Enter" && city) {
@@ -10,6 +9,9 @@ const LocationInput = (props) => {
         }
       };
     return(
+      <header>
+      <p
+      className="header">Weather App</p>
         <div
         className="location-input-box">
             <input
@@ -18,9 +20,21 @@ const LocationInput = (props) => {
             className="location-input-field"
             placeholder="Search"
             onKeyPress={(e) => onAddCity(e)}
-            onChange={(e) => setCity(e.target.value)}
+            onChange={(e) => {
+              setCity(e.target.value)
+              searchLocation(e.target.value)
+            }}
             value={city} />
+            
+            {suggestions && <ul className="suggestions-box">
+                {suggestions.map((suggestion) => (
+                <li className="suggestion"
+                  key={suggestion}
+                  >{suggestion}</li>
+                  ))}
+              </ul>}
         </div>
+        </header>
     )
 }
 
