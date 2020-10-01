@@ -47,4 +47,13 @@ section {
 }
 .weather-report {
   border: 1px dashed black;
+  padding: 20px 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+}
+.day-weather-report{
+  border: 1px dashed black;
+  padding: 10px;
 }
