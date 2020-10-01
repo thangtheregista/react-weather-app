@@ -8,6 +8,7 @@ const Header  = () => {
         className="location-input-box">
             <input 
             placeholder="Search"
+            
             />
         </div>
         </header>
