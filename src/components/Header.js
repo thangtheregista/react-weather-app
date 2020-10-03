@@ -1,13 +1,27 @@
 import React, { useState } from 'react';
-const Header = (props) => {
-  const { searchLocation, suggestions, loading, error } = props;
-  const [city, setCity] = useState("");
-  return(
+
+// COMPONENTS
+import Location from './Location';
+
+const Header = ({ 
+  searchLocation, 
+  getWeatherByID,
+  loading, 
+  searchResults, 
+}) => {
+  const [city, setCity] = useState('');
+  return (
     <header>
-      <p className="app-heading">Weather Forecast App</p>
+      <p className="app-heading">
+        Weather Forecast App
+      </p>
       <div className="location-input-box">
         <div className="mag-glass-div">
-          {loading ? (<img src="/Spinner-1s-200px.svg" alt="Loading" className="spinner" />) : (<img src="/magnifying-glass.svg" alt="magnifying-glass" className="mag-glass"/>)}
+          { 
+            loading ? 
+            (<img src="/Spinner-1s-200px.svg" alt="Loading" className="spinner" />) : 
+            (<img src="/magnifying-glass.svg" alt="magnifying-glass" className="mag-glass"/>) 
+          }
         </div>
         <input
           onChange={(e) => {
@@ -19,28 +33,32 @@ const Header = (props) => {
           placeholder="Search"
         />
       </div>
-      { !suggestions && error === false && 
+      { 
+        searchResults === undefined &&  
         <div className="input-status">
           Please search for a city.
         </div> 
       }
-      { error === true && 
+      { 
+        searchResults === null && 
         <ul className="suggestions-box">
           <li className="suggestion">
             No results.
           </li>
         </ul>
       }
-      { suggestions && 
+      { 
+        searchResults && 
         <ul className="suggestions-box">
-          { suggestions.map((suggestion) => (
-            <li
-              className="suggestion"
-              key={suggestion}>
-                {suggestion}
-            </li>
+          { searchResults.map((location) => (
+            <Location
+              woeid={location.woeid}
+              key={location.woeid}
+              suggestion={location.title}
+              getWeatherByID={getWeatherByID}
+            />
           ))}
-        </ul>
+        </ul> 
       }
     </header>
   )

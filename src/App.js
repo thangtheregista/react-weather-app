@@ -2,27 +2,25 @@ import React from 'react';
 import Axios from 'axios';
 import { debounce } from 'debounce';
 
-//COMPONENTS
+// COMPONENTS
 import Header from './components/Header';
+import Weather from './components/Weather';
 
-//STYLES
+// STYLES
 import './App.css';
 
 class App extends React.Component {
   state = {
-    suggestions: undefined,
     loading: false,
-    error: false,
-  }
-
-  setLoadingToTrue = () => {
-    this.setState({
-      loading: true
-    })
+    weatherLoading: false,
+    selectedLocation: undefined,
+    searchResults: undefined,
   }
 
   searchLocation = debounce((text) => {
-    this.setLoadingToTrue()
+    this.setState({
+      loading: true,
+    })
     if (text.length > 2) {
       const url = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/search/?query=${text}`
       Axios.get(url, {
@@ -31,39 +29,66 @@ class App extends React.Component {
         }
       })
       .then(res => {
-        const cityNames = res.data.slice(0, 5).map(city => city.title)
-
-        if (cityNames.length === 0) {
+        if (res.data.length === 0) {
           this.setState({
-            suggestions: undefined,
+            searchResults: null,
+            selectedLocation: null,
             loading: false,
-            error: true,
           })
         } else {
           this.setState({
-            suggestions: cityNames,
+            searchResults: res.data.slice(0, 5),
             loading: false,
-            error: false,
           })
+          this.getWeatherByID(res.data[0].woeid)
         }
-    })
+      })
+      .catch(err => console.log(err))
     } else {
       this.setState({
-        suggestions: undefined,
+        searchResults: null,
+        selectedLocation: null,
         loading: false,
-        error: false,
       })
     }
   }, 500)
 
+  getWeatherByID = debounce((id) => {
+    const url = `https://cors-anywhere.herokuapp.com/https://www.metaweather.com/api/location/${id}/`
+    this.setState({
+      weatherLoading: true,
+    })
+    Axios.get(url, {
+      headers: {
+        'x-requested-with': null
+      }
+    })
+    .then(res => {
+      this.setState({
+        selectedLocation: res.data,
+        weatherLoading: false
+      })
+    })
+  }, 500)
+
   render () {
+    const { 
+      loading,
+      weatherLoading, 
+      searchResults, 
+      selectedLocation 
+    } = this.state;
     return (
       <div className="App">
         <Header 
           searchLocation={this.searchLocation}
-          suggestions={this.state.suggestions}
-          loading={this.state.loading}
-          error={this.state.error}
+          getWeatherByID={this.getWeatherByID}
+          loading={loading}
+          searchResults={searchResults}
+        />
+        <Weather 
+          weatherLoading={weatherLoading}
+          selectedLocation = {selectedLocation}
         />
       </div>
     );

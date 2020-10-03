@@ -53,4 +53,26 @@ input {
 }
 .suggestion {
   padding: 10px 15px;
+  cursor: pointer;
+}
+section {
+  padding: 20px 0;
+  margin: 0;
+}
+.spinner2 {
+  width: 30px;
+}
+.weather-report {
+  border: 1px dashed black;
+  padding: 10px;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: space-between;
+}
+.day-weather-report{
+  border: 1px dashed black;
+  padding: 10px 15px; 
 }
